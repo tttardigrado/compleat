@@ -1,8 +1,8 @@
-package main
+package converter
 
 import (
-	bf "fmmb/brainfuck"
-	m "fmmb/midipackage"
+	bf "compleat/brainfuck"
+	m "compleat/midipackage"
 )
 
 // Process a brainfuck program into a MusicProgram
