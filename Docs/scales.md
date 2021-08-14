@@ -1,10 +1,8 @@
-# Compleat Documentation
-
-## Scales
+# Scales
 
 The note that is converted to a certain operator depends on the chosen scale.
 
-### Major Scales
+## Major Scales
 
 | Operators |  C  | C#  |  D  | D#  |  E  |  F  | F#  |  G  | G#  |  A  | A#  |  B  |
 | :-------: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -20,7 +18,7 @@ The note that is converted to a certain operator depends on the chosen scale.
 |           |     |     |     |     |     |     |     |     |     |     |     |     |
 | Variable  | CM  | CxM | DM  | DxM | EM  | FM  | FxM | GM  | GxM | AM  | AxM | BM  |
 
-### Minor Scales
+## Minor Scales
 
 | Operators |  C  | C#  |  D  | D#  |  E  |  F  | F#  |  G  | G#  |  A  | A#  |  B  |
 | :-------: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -35,9 +33,3 @@ The note that is converted to a certain operator depends on the chosen scale.
 |           |     |     |     |     |     |     |     |     |     |     |     |     |
 |           |     |     |     |     |     |     |     |     |     |     |     |     |
 | Variable  | Cm  | Cxm | Dm  | Dxm | Em  | Fm  | Fxm | Gm  | Gxm | Am  | Axm | Bm  |
-
-## CLI
-
-## Turing machine
-
-## Examples
