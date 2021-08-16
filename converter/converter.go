@@ -21,43 +21,34 @@ func ProcessBF(bfProgram []rune, scale m.Scale) (notes m.MusicProgram) {
 					break
 				}
 			}
-			break
 
 		case '-': // 1st note on the scale
 			notes = append(notes, scale[0])
-			break
 
 		case '+': // 2nd note on the scale
 			notes = append(notes, scale[1])
-			break
 
 		case '<': // 3rd note on the scale
 			notes = append(notes, scale[2])
-			break
 
 		case '>': // 4th note on the scale
 			notes = append(notes, scale[3])
-			break
 
 		case '[': // 5th note on the scale
 			notes = append(notes, scale[4])
-			break
 
 		case ']': // 6th note on the scale
 			notes = append(notes, scale[5])
-			break
 
 		case '.': // 7th note on the scale
 			notes = append(notes, scale[6])
-			break
 
 		case ',': // 8th note on the scale
 			notes = append(notes, scale[7])
-			break
 
 		default:
 			// ignore unrecognized characters
-			break
+
 		}
 	}
 	return
@@ -103,39 +94,31 @@ func ProcessMidi(midi m.MusicProgram, scale m.Scale) (bfProgram []rune) {
 		switch note {
 		case scale[0]: // add -
 			bfProgram = append(bfProgram, '-')
-			break
 
 		case scale[1]: // add +
 			bfProgram = append(bfProgram, '+')
-			break
 
 		case scale[2]: // add <
 			bfProgram = append(bfProgram, '<')
-			break
 
 		case scale[3]: // add >
 			bfProgram = append(bfProgram, '>')
-			break
 
 		case scale[4]: // add [
 			bfProgram = append(bfProgram, '[')
-			break
 
 		case scale[5]: // add ]
 			bfProgram = append(bfProgram, ']')
-			break
 
 		case scale[6]: // add .
 			bfProgram = append(bfProgram, '.')
-			break
 
 		case scale[7]: // add ,
 			bfProgram = append(bfProgram, ',')
-			break
 
 		default:
 			// ignore other notes
-			break
+
 		}
 	}
 	return
@@ -159,7 +142,6 @@ func ProcessMidi(midi m.MusicProgram, scale m.Scale) (bfProgram []rune) {
 func MidiToBF(file string, scale m.Scale) ([]rune, error) {
 	// read the midi file
 	midiFile, err := m.Read(file)
-
 	if err != nil {
 		return []rune{}, err
 	}

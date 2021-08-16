@@ -2,8 +2,8 @@ package brainfuck
 
 import (
 	"fmt"
-
 	"io/ioutil"
+	"os"
 )
 
 // Run a slice of runes as a brainfuck commands
@@ -41,4 +41,23 @@ func RunFile(file string) (Program, error) {
 	program, err2 := RunBF(content)
 
 	return program, err2
+}
+
+func WriteFile(file string, program []rune) error {
+	f, err := os.Create(file)
+	if err != nil {
+		return err
+	}
+
+	_, err = f.WriteString(string(program))
+	if err != nil {
+		f.Close()
+		return err
+	}
+
+	err = f.Close()
+	if err != nil {
+		return err
+	}
+	return nil
 }

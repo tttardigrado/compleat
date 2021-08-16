@@ -20,12 +20,14 @@ func (m MidiNote) writeNote(wr *w.SMF, delta uint32, vel uint8) {
 // Write a musicProgram to a SMF (Standard Midi File)
 // All notes are written to channel 0
 func (m *MusicProgram) Write(file string) error {
-	// remove that file to wich the midi message will be written
-	// to avoid conflicts
-	defer os.Remove(file)
+	// create file
+	_, err := os.Create(file)
+	if err != nil {
+		return err
+	}
 
 	// Write all notes from the program to a SMF
-	err := w.WriteSMF(file, 1, func(wr *w.SMF) error {
+	err = w.WriteSMF(file, 2, func(wr *w.SMF) error {
 
 		wr.SetChannel(0)
 
@@ -40,6 +42,5 @@ func (m *MusicProgram) Write(file string) error {
 
 		return nil
 	})
-
 	return err
 }

@@ -66,8 +66,5 @@ func (c *Cell) SetFromInput() {
 // Check if the cell is Null
 // Cell(0) / NullCell is the null value for cell
 func (c *Cell) IsNull() bool {
-	if *c == NullCell {
-		return true
-	}
-	return false
+	return *c == NullCell
 }

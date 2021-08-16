@@ -24,15 +24,15 @@ func (p *Program) InterpretCommand() error {
 	case '+':
 		// C ++*ptr;
 		p.Mem.Increment()
-		break
+
 	case '-':
 		// C --*ptr;
 		p.Mem.Decrement()
-		break
+
 	case '>':
 		// C ++ptr;
 		p.Mem.MoveUp()
-		break
+
 	case '<':
 		// C --ptr;
 		// this can result in error if the cursor is moved to -1
@@ -42,19 +42,19 @@ func (p *Program) InterpretCommand() error {
 	case '.':
 		// C putchar(*ptr);
 		p.Mem.Print()
-		break
+
 	case ',':
 		// C *ptr = getchar();
 		p.Mem.Ask()
-		break
+
 	case '[':
 		// C while (*ptr){
 		p.BeginLoop()
-		break
+
 	case ']':
 		// C }
 		p.EndLoop()
-		break
+
 	default:
 		// don't process
 		break

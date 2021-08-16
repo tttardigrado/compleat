@@ -1,6 +1,10 @@
 package midipackage
 
+import "errors"
+
 const numberOfNotes uint8 = 12
+
+var ScaleError error = errors.New("The provided Scale is not recognized")
 
 const (
 	C3 MidiNote = iota + 48
