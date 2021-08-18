@@ -16,33 +16,80 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
+	bf "compleat/brainfuck"
+	"compleat/converter"
+	m "compleat/midipackage"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
-var file string
+
+var runOutputName string
+var runScaleStr string
+
 // runCmd represents the run command
 var runCmd = &cobra.Command{
 	Use:   "run",
-	Short: "Run a Compleat source code file",
-	Long: `The "run" command runs the provided file as a compleat program.
-If it's a brainfuck file (.bf or .b), it will be ran as such.
-If it's a midi/compleat file (.mid or .midi) it will be ran as a Compleat program.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(file)
+	Short: "Run a brainfuck or Compleat file.",
+	Long: `Run a brainfuck or Compleat file.
+Make sure the Comments on your brainfuck files don't contain operators since that could result in some translation errors.
+
+If you provide an Argument to the -o/--output flag, the file will also be translated with the provided name as the name of the output file.
+If you don't, the file will only be interpreted.
+
+Providing an Argument to the -s/--scale flag will change the scale that interprets the file.`,
+	Args: cobra.ExactArgs(1),
+	RunE: func(cmd *cobra.Command, args []string) error {
+
+		scale, err := m.NewScale(runScaleStr)
+		if err != nil {
+			return err
+		}
+
+		file := args[0]
+
+		if strings.HasSuffix(file, ".mid") || strings.HasSuffix(file, ".midi") {
+			program, err := converter.MidiToBF(file, scale)
+			if err != nil {
+				return err
+			}
+
+			_, err = bf.RunBF(program)
+			if err != nil {
+				return err
+			}
+
+			if runOutputName != "" {
+				bf.WriteFile(runOutputName, program)
+			}
+
+		} else if strings.HasSuffix(file, ".bf") || strings.HasSuffix(file, ".b") {
+			_, err = bf.RunFile(file)
+			if err != nil {
+				return err
+			}
+
+			if runOutputName != "" {
+
+				program, err := converter.BfToMidi(file, scale)
+				if err != nil {
+					return err
+				}
+
+				err = program.Write("./" + runOutputName)
+				if err != nil {
+					return err
+				}
+			}
+
+		}
+		return nil
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(runCmd)
-	runCmd.Flags().StringVarP(&file, "file", "f", "", "Midi or brainfuck file to be ran")
-	// Here you will define your flags and configuration settings.
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// runCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// runCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	runCmd.Flags().StringVarP(&runOutputName, "output", "o", "", "Name of the output file")
+	runCmd.Flags().StringVarP(&runScaleStr, "scale", "s", "CM", "Scale to be used when processing the file")
 }
