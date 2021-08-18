@@ -43,6 +43,8 @@ The output file name will follow the following conventions:
 		file := args[0]
 		if outputName == "" {
 			outputName = strings.Split(file, ".")[0]
+		} else {
+			outputName = strings.Split(outputName, ".")[0]
 		}
 
 		if strings.HasSuffix(file, ".mid") || strings.HasSuffix(file, ".midi") {
