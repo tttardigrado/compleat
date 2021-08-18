@@ -29,7 +29,7 @@ var runScaleStr string
 
 // runCmd represents the run command
 var runCmd = &cobra.Command{
-	Use:   "run",
+	Use:   "run [input_file] [flags]",
 	Short: "Run a brainfuck or Compleat file.",
 	Long: `Run a brainfuck or Compleat file.
 Make sure the Comments on your brainfuck files don't contain operators since that could result in some translation errors.

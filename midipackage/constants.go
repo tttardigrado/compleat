@@ -2,10 +2,10 @@ package midipackage
 
 import "errors"
 
-const numberOfNotes uint8 = 12
-
+// Error that should be used when anything related to scales could go wrong
 var ScaleError error = errors.New("The provided Scale is not recognized")
 
+// Midi notes from C3 to B4
 const (
 	C3 MidiNote = iota + 48
 	Cx3
@@ -33,6 +33,7 @@ const (
 	B4
 )
 
+// Major and Minor scales
 var (
 	// Major
 	CM Scale = Scale{C3, D3, E3, F3, G3, A3, B3, C4}

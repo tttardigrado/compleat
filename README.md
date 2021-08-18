@@ -29,6 +29,7 @@ I try to learn something new with every project, and with **Compleat** I tryed t
 - Languages:
   - [**Golang**](https://golang.org/)
 - Packages:
+  - [**spf13/cobra**](https://github.com/spf13/cobra)
   - [**testify/assert**](https://github.com/stretchr/testify)
   - [**midi/reader**](https://gitlab.com/gomidi/midi/-/tree/master/reader)
   - [**midi/writer**](https://gitlab.com/gomidi/midi/-/tree/master/writer)
@@ -40,9 +41,14 @@ I try to learn something new with every project, and with **Compleat** I tryed t
 The main program is located within the root folder, but I split this project in 2 subfolders:
 
 - **./brainfuck**: This folder handles anything that has to do with the brainf\*ck language, and it technically is a standalone interpreter if you make it run as a CLI program.
-- **./midi**: This folder handles everything that messes with midi.
+
+- **./midipackage**: This folder handles everything that messes with midi.
 
 - **./converter**: This folder handles the convertion between midi and brainfuck and vice versa.
+
+- **./cmd**: This folder handles the CLI app that is made with cobra.
+
+- **./docs**: This is the Documentation folder. If you want to use **Compleat** this is a good introduction.
 
 ## Contributing
 
