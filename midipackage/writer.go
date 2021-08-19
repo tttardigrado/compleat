@@ -15,19 +15,21 @@ func (m MidiNote) writeNote(wr *w.SMF, delta uint32, vel uint8) {
 	w.NoteOn(wr, key, vel)
 	wr.SetDelta(delta)
 	w.NoteOff(wr, key)
+	wr.SetDelta(delta)
 }
 
 // Write a musicProgram to a SMF (Standard Midi File)
 // All notes are written to channel 0
-func (m *MusicProgram) Write(file string) error {
+func (m *MusicProgram) Write(file string, delta uint32) error {
 	// create file
+	os.Remove(file)
 	_, err := os.Create(file)
 	if err != nil {
 		return err
 	}
 
 	// Write all notes from the program to a SMF
-	err = w.WriteSMF(file, 2, func(wr *w.SMF) error {
+	err = w.WriteSMF(file, 1, func(wr *w.SMF) error {
 
 		wr.SetChannel(0)
 
@@ -35,7 +37,7 @@ func (m *MusicProgram) Write(file string) error {
 		// velocity of 100
 		// length of 120
 		for _, note := range *m {
-			note.writeNote(wr, 120, 100)
+			note.writeNote(wr, delta, 100)
 		}
 
 		w.EndOfTrack(wr)

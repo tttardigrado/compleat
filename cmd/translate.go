@@ -12,6 +12,7 @@ import (
 
 var outputName string
 var scaleStr string
+var delta uint
 
 // translateCmd represents the translate command
 var translateCmd = &cobra.Command{
@@ -60,7 +61,7 @@ The output file name will follow the following conventions:
 			if err != nil {
 				return err
 			}
-			err = program.Write("./" + outputName + ".midi")
+			err = program.Write(outputName + ".midi", uint32(delta))
 			if err != nil {
 				return err
 			}
@@ -75,4 +76,5 @@ func init() {
 
 	translateCmd.Flags().StringVarP(&outputName, "output", "o", "", "Name of the output file")
 	translateCmd.Flags().StringVarP(&scaleStr, "scale", "s", "CM", "Scale to be used when processing the file")
+	translateCmd.Flags().UintVarP(&delta, "delta", "d", 360, "Delta time of every midi note")
 }
